@@ -79,8 +79,9 @@ so far and the standard library.***
 ***When one of the players scores 21 points, congratulations to the winner are displayed on the screen and the game ends.==***
 
 ## Bonus Part:
+
 ***== Quest received. You need to implement interactive version of the PONG (real-time game mode). Additional 
-libraries can be used to simplify the processing of the players' actions and displaying symbolic graphics..==***
+libraries can be used to simplify the processing of the players' actions and displaying symbolic graphics. The interactive mode code must be in the src/pong_interactive.c file. To implement the bonus part, you must implement the base part first. ==***
 
 ## Important notes:
 
