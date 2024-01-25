@@ -1,5 +1,8 @@
 # P01D06
 
+
+Полезные видеоматериалы ты можешь найти в разделе "Projects (Media)" на Платформе.
+
 ![dayp01](misc/rus/images/dayp01.png)
 
 ## Contents
