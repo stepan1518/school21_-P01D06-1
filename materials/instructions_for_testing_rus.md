@@ -35,6 +35,6 @@
    ```cppcheck --enable=all --suppress=missingIncludeSystem src/```
 
     
-   Необходимая версия clang-format: \
+   Необходимая версия cppcheck: \
    **Mac** 2.8 \
    **Linux** 2.8
