@@ -1,6 +1,5 @@
 # P01D06
 
-
 Foydali video materiallarni Platformadagi “Projects (Media)” bo‘limida topishingiz mumkin. 
 
 ![dayp01](misc/rus/images/dayp01.png)
