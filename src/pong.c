@@ -22,7 +22,7 @@ int main() {
     char direction_ud = 'd';
 
     int racket_first_move = 1, racket_second_move = -1, racket_first_pos = Y_START,
-        racket_second_pos = Y_LIMIT - RACKET_SIZE + 1, new_pos, new_move;
+        racket_second_pos = Y_LIMIT - RACKET_SIZE + 1, new_move;
     char up_first = 'A', down_first = 'Z', up_second = 'K',
         down_second = 'M';
 
