@@ -74,4 +74,4 @@ int move_ball_y(int ball_y, char direction_ud) {
     } else {
         return ball_y + 1;
     }
-}
+}    
