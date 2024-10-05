@@ -9,6 +9,7 @@ void render_canvas(int ball_x, int ball_y, int racket_first_pos, int racket_seco
 int move_ball_x(int ball_x, char direction_rl);
 int move_ball_y(int ball_y, char direction_ud);
 int move_racket(int cur_pos, int move);
+int update_move(char action, char up, char down);
 
 int main() {
     int p1 = 0;
@@ -21,7 +22,9 @@ int main() {
     char direction_ud = 'd';
 
     int racket_first_move = 1, racket_second_move = -1, racket_first_pos = Y_START,
-        racket_second_pos = Y_LIMIT - RACKET_SIZE + 1, new_pos;
+        racket_second_pos = Y_LIMIT - RACKET_SIZE + 1, new_pos, new_move;
+    char up_first = 'A', down_first = 'Z', up_second = 'K',
+        down_second = 'M';
 
     while (!win) {
         render_canvas(ball_x, ball_y, racket_first_pos, racket_second_pos);
@@ -39,17 +42,13 @@ int main() {
             direction_ud = 'd';
         }
 
-        if ((new_pos = move_racket(racket_first_pos, racket_first_move)) > racket_first_pos)
-            racket_first_move = 1;
-        else
-            racket_first_move = -1;
-        racket_first_pos = new_pos;
+        if ((new_move = update_move(action, up_first, down_first)) != 0)
+            racket_first_move = new_move;
+        if ((new_move = update_move(action, up_second, down_second)) != 0)
+            racket_second_move = new_move;
 
-        if ((new_pos = move_racket(racket_second_pos, racket_second_move)) > racket_second_pos)
-            racket_second_move = 1;
-        else
-            racket_second_move = -1;
-        racket_second_pos = new_pos;
+        racket_first_pos = move_racket(racket_first_pos, racket_first_move);
+        racket_second_pos = move_racket(racket_second_pos, racket_second_move);
         
         //if (p1 == 21) {
         //    printf("Player 1 wins!");
@@ -102,10 +101,18 @@ int move_ball_y(int ball_y, char direction_ud) {
     }
 }
 
+int update_move(char action, char up, char down) {
+    if (action == up)
+        return 1;
+    if (action == down)
+        return -1;
+    return 0;
+}
+
 int move_racket(int cur_pos, int move) {
-    if (cur_pos + RACKET_SIZE - 1 >= Y_LIMIT)
-        move = -1;
-    if (cur_pos <= Y_START)
-        move = 1;
+    if (cur_pos + RACKET_SIZE - 1 >= Y_LIMIT && move > 0)
+        return cur_pos;
+    if (cur_pos <= Y_START && move < 0)
+        return cur_pos;
     return cur_pos + move;
 }
