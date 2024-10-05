@@ -10,7 +10,7 @@ int main() {
     char action;
     int win = 0;
     int ball_y = 12;
-    int ball_x = 39;
+    int ball_x = 38;
     char direction_rl = 'r';
     char direction_ud = 'd';
     while (!win) {
@@ -18,12 +18,12 @@ int main() {
         scanf("%c", &action);
         ball_x = move_ball_x(ball_x, direction_rl);
         ball_y = move_ball_y(ball_y, direction_ud);
-        if (ball_x == 79) {
+        if (ball_x == 78) {
             direction_rl = 'l';
         } else if (ball_x == 1) {
             direction_rl = 'r';
         }
-        if (ball_y == 24) {
+        if (ball_y == 23) {
             direction_ud = 'u';
         } else if (ball_y == 1) {
             direction_ud = 'd';
@@ -46,13 +46,13 @@ void render_canvas(int ball_x, int ball_y){
     //char rocket_right = "[";
     char ball = 'O';
     printf("\033[H\033[J");
-    for (int i = 0; i <= 25; i++) {
-        for (int j = 0; j <= 80; j++) {
+    for (int i = 0; i < 25; i++) {
+        for (int j = 0; j < 80; j++) {
             if (i == ball_y && j == ball_x) {
                 printf("%c", ball);
-            } else if (i == 0 || i == 25) {
+            } else if (i == 0 || i == 24) {
                 printf("%c", border_ud);
-            } else if (i > 0 && i < 25 && (j == 0 || j == 39 || j == 80)) {
+            } else if (i > 0 && i < 24 && (j == 0 || j == 38 || j == 79)) {
                 printf("%c", border_lr);
             } else { printf(" "); }
         }
