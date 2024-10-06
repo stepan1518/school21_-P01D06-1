@@ -115,7 +115,6 @@ int move_racket(int cur_pos, int move) {
         return cur_pos;
     if (cur_pos <= Y_START && move < 0)
         return cur_pos;
-    printf("%d ", cur_pos);
     return cur_pos + move;
 }
 
