@@ -22,13 +22,14 @@ int main() {
     char direction_rl = 'r';
     char direction_ud = 'd';
 
-    int racket_first_move = 1, racket_second_move = -1, racket_first_pos = 1, racket_second_pos = 23 - 3 + 1,
-        new_move;
+    int racket_first_move = 1, racket_second_move = -1, racket_first_pos = 1, racket_second_pos = 23 - 3 + 1;
     char up_first = 'z', down_first = 'a', up_second = 'm', down_second = 'k';
 
     render_canvas(ball_x, ball_y, racket_first_pos, racket_second_pos, p1, p2);
     while (!win) {
+        int new_move;
         char trash;
+
         scanf("%c", &action);
         trash = action;
 
@@ -89,7 +90,7 @@ void render_canvas(int ball_x, int ball_y, int racket_first_pos, int racket_seco
                 printf("%c", racket_right);
             } else if (i == 0 || i == 24) {
                 printf("%c", border_ud);
-            } else if (i > 0 && i < 24 && (j == 38)) {
+            } else if (j == 38) {
                 printf("%c", border_lr);
             } else if (i == 5 && j == 33) {
                 printf("%d", p1);
