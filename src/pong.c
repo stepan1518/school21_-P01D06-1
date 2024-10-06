@@ -10,6 +10,10 @@ int move_ball_x(int ball_x, char direction_rl);
 int move_ball_y(int ball_y, char direction_ud);
 int move_racket(int cur_pos, int move);
 int update_move(char action, char up, char down);
+char switch_direction_rl(int ball_x, int racket_first_pos, int racket_second_pos, char direction_rl, int flag);
+char switch_direction_ud(int ball_y, int racket_first_pos, int racket_second_pos, char direction_ud);
+int flag_to_switch_rl(int ball_y, int racket_first_pos, int racket_second_pos);
+
 
 int main() {
     int p1 = 0;
@@ -27,20 +31,14 @@ int main() {
         down_second = 'k';
 
     while (!win) {
+        int flag;
         render_canvas(ball_x, ball_y, racket_first_pos, racket_second_pos);
         scanf("%c", &action);
         ball_x = move_ball_x(ball_x, direction_rl);
         ball_y = move_ball_y(ball_y, direction_ud);
-        if (ball_x == 78) {
-            direction_rl = 'l';
-        } else if (ball_x == 1) {
-            direction_rl = 'r';
-        }
-        if (ball_y == 23) {
-            direction_ud = 'u';
-        } else if (ball_y == 1) {
-            direction_ud = 'd';
-        }
+        direction_ud = switch_direction_ud(ball_y, racket_first_pos, racket_second_pos, direction_ud);
+        flag = flag_to_switch_rl(ball_y, racket_first_pos, racket_second_pos);
+        direction_rl = switch_direction_rl(ball_x, racket_first_pos, racket_second_pos, direction_rl, flag);
 
         if ((new_move = update_move(action, up_first, down_first)) != 0)
             racket_first_move = new_move;
@@ -117,5 +115,41 @@ int move_racket(int cur_pos, int move) {
         return cur_pos;
     if (cur_pos <= Y_START && move < 0)
         return cur_pos;
+    printf("%d ", cur_pos);
     return cur_pos + move;
+}
+
+char switch_direction_rl(int ball_x, int racket_first_pos, int racket_second_pos, char direction_rl, int flag) {
+    if (ball_x == 79) { //loose
+        direction_rl = 'l';
+    } else if (ball_x == 0) {
+        direction_rl = 'r';
+    }
+    if (ball_x == 77 && flag == 1) {
+        direction_rl = 'l';
+    } else if (ball_x == 2 && flag == 1) {
+        direction_rl = 'r';
+    }
+    return direction_rl;
+}
+
+char switch_direction_ud(int ball_y, int racket_first_pos, int racket_second_pos, char direction_ud) {
+    if (ball_y == 23) {
+        direction_ud = 'u';
+    } else if (ball_y == 1) {
+        direction_ud = 'd';
+    }
+    return direction_ud;
+
+}
+
+int flag_to_switch_rl(int ball_y, int racket_first_pos, int racket_second_pos) {
+    int tmp;
+    if (ball_y == racket_first_pos + 1 || ball_y == racket_first_pos + 2 || ball_y == racket_first_pos) {
+        tmp = 1;
+    }
+    if (ball_y == racket_second_pos + 1 || ball_y == racket_second_pos + 2 || ball_y == racket_second_pos) {
+        tmp = 1;
+    }
+    return tmp;
 }
