@@ -71,9 +71,9 @@ void render_canvas(int ball_x, int ball_y, int racket_first_pos, int racket_seco
         for (int j = 0; j < 80; j++) {
             if (i == ball_y && j == ball_x) {
                 printf("%c", ball);
-            } else if (i >= racket_first_pos && i <= racket_first_pos + 2 && j == 0) {
+            } else if (i >= racket_first_pos && i <= racket_first_pos + 2 && j == 1) {
                 printf("%c", racket_left);
-            } else if (i >= racket_second_pos && i <= racket_second_pos + 2 && j == X_LIMIT + 1) {
+            } else if (i >= racket_second_pos && i <= racket_second_pos + 2 && j == X_LIMIT) {
                 printf("%c", racket_right);
             } else if (i == 0 || i == 24) {
                 printf("%c", border_ud);
@@ -87,26 +87,29 @@ void render_canvas(int ball_x, int ball_y, int racket_first_pos, int racket_seco
 
 int move_ball_x(int ball_x, char direction_rl) {
     if (direction_rl == 'r'){
-        return ball_x + 1;
+        ball_x = ball_x + 1;
     } else {
-        return ball_x - 1;
+        ball_x = ball_x - 1;
     }
+    return ball_x;
 }
 
 int move_ball_y(int ball_y, char direction_ud) {
     if (direction_ud == 'u'){
-        return ball_y - 1;
+        ball_y = ball_y - 1;
     } else {
-        return ball_y + 1;
+        ball_y = ball_y + 1;
     }
+    return ball_y;
 }
 
 int update_move(char action, char up, char down) {
+    int flag = 0;
     if (action == up)
-        return 1;
+        flag = 1;
     if (action == down)
-        return -1;
-    return 0;
+        flag = -1;
+    return flag;
 }
 
 int move_racket(int cur_pos, int move) {
