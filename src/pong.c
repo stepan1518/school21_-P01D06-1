@@ -13,47 +13,33 @@ int flag_to_score(int ball_x);
 int win_process(int p1, int p2);
 
 int main() {
-    int p1 = 0;
-    int p2 = 0;
+    int p1 = 0, p2 = 0;
     char action;
     int win = 0;
-    int ball_y = 12;
-    int ball_x = 38;
-    char direction_rl = 'r';
-    char direction_ud = 'd';
-
+    int ball_y = 12, ball_x = 38;
+    char direction_rl = 'r', direction_ud = 'd';
     int racket_first_move = 1, racket_second_move = -1, racket_first_pos = 1, racket_second_pos = 23 - 3 + 1;
     char up_first = 'z', down_first = 'a', up_second = 'm', down_second = 'k';
-
     render_canvas(ball_x, ball_y, racket_first_pos, racket_second_pos, p1, p2);
     while (!win) {
         int new_move;
         char trash;
-
         scanf("%c", &action);
         trash = action;
-
         while (trash != '\n') scanf("%c", &trash);
-
         int flag_first = 0;
         int flag_second = 0;
-
         if ((new_move = update_move(action, up_first, down_first)) != 0) racket_first_move = new_move;
         if ((new_move = update_move(action, up_second, down_second)) != 0) racket_second_move = new_move;
-
         racket_first_pos = move_racket(racket_first_pos, racket_first_move);
         racket_second_pos = move_racket(racket_second_pos, racket_second_move);
-
         ball_x = move_ball_x(ball_x, direction_rl);
         ball_y = move_ball_y(ball_y, direction_ud);
-
         direction_ud = switch_direction_ud(ball_y, direction_ud);
         flag_first = flag_first_to_switch_rl(ball_y, racket_first_pos);
         flag_second = flag_second_to_switch_rl(ball_y, racket_second_pos);
         direction_rl = switch_direction_rl(ball_x, direction_rl, flag_first, flag_second);
-
         render_canvas(ball_x, ball_y, racket_first_pos, racket_second_pos, p1, p2);
-
         if (flag_to_score(ball_x) == 1) {
             p1++;
             ball_x = 38;
@@ -63,9 +49,7 @@ int main() {
             ball_x = 38;
             ball_y = 12;
         }
-
         win = win_process(p1, p2);
-
         if (action == 'q') {
             break;
         }
