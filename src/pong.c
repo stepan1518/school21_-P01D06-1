@@ -1,10 +1,5 @@
 #include <stdio.h>
 
-#define Y_START 1
-#define Y_LIMIT 23
-#define X_LIMIT 78
-#define RACKET_SIZE 3
-
 void render_canvas(int ball_x, int ball_y, int racket_first_pos, int racket_second_pos, int p1, int p2);
 int move_ball_x(int ball_x, char direction_rl);
 int move_ball_y(int ball_y, char direction_ud);
@@ -27,8 +22,8 @@ int main() {
     char direction_rl = 'r';
     char direction_ud = 'd';
 
-    int racket_first_move = 1, racket_second_move = -1, racket_first_pos = Y_START,
-        racket_second_pos = Y_LIMIT - RACKET_SIZE + 1, new_move;
+    int racket_first_move = 1, racket_second_move = -1, racket_first_pos = 1, racket_second_pos = 23 - 3 + 1,
+        new_move;
     char up_first = 'z', down_first = 'a', up_second = 'm', down_second = 'k';
 
     render_canvas(ball_x, ball_y, racket_first_pos, racket_second_pos, p1, p2);
@@ -90,7 +85,7 @@ void render_canvas(int ball_x, int ball_y, int racket_first_pos, int racket_seco
                 printf("%c", ball);
             } else if (i >= racket_first_pos && i <= racket_first_pos + 2 && j == 1) {
                 printf("%c", racket_left);
-            } else if (i >= racket_second_pos && i <= racket_second_pos + 2 && j == X_LIMIT) {
+            } else if (i >= racket_second_pos && i <= racket_second_pos + 2 && j == 78) {
                 printf("%c", racket_right);
             } else if (i == 0 || i == 24) {
                 printf("%c", border_ud);
@@ -135,8 +130,8 @@ int update_move(char action, char up, char down) {
 
 int move_racket(int cur_pos, int move) {
     int res = cur_pos + move;
-    if (cur_pos + RACKET_SIZE - 1 >= Y_LIMIT && move > 0) res = cur_pos;
-    if (cur_pos <= Y_START && move < 0) res = cur_pos;
+    if (cur_pos + 3 - 1 >= 23 && move > 0) res = cur_pos;
+    if (cur_pos <= 1 && move < 0) res = cur_pos;
     return res;
 }
 
